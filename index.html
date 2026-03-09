@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DAURAAN | The Art of Timeless Elegance</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+
+    <!-- STICKY HEADER -->
+    <header class="sticky-nav">
+        <button class="nav-tool" onclick="toggleDrawer()">
+            <i class="fas fa-bars"></i>
+        </button>
+
+        <a href="index.html" class="logo-container">
+            <span class="logo-main">DAURAAN</span>
+            <span class="logo-tag">Premium Lifestyle Collection</span>
+        </a>
+
+        <div style="display: flex; gap: 15px;">
+            <button class="nav-tool" onclick="toggleTheme()" id="theme-toggle">
+                <i class="fas fa-sun"></i>
+            </button>
+            <!-- <a href="admin.html" class="nav-tool">
+                <i class="far fa-user-circle"></i>
+            </a> -->
+        </div>
+    </header>
+
+    <!-- SIDE DRAWER -->
+    <div class="drawer-overlay" id="drawer-overlay" onclick="toggleDrawer()"></div>
+    <div class="side-drawer" id="side-drawer">
+        <a href="index.html" class="logo-container" style="margin-bottom: 40px;">
+            <span class="logo-main">DAURAAN</span>
+        </a>
+        <ul class="drawer-links">
+            <li><a href="#home" onclick="toggleDrawer()">Home</a></li>
+            <li><a href="#products-watches" onclick="toggleDrawer()">Shop Watches</a></li>
+            <li><a href="#products-perfumes" onclick="toggleDrawer()">Shop Perfumes</a></li>
+            <li><a href="#products-others" onclick="toggleDrawer()">Luxury Essentials</a></li>
+            <li><a href="#about" onclick="toggleDrawer()">About Us</a></li>
+            <li><a href="#reviews" onclick="toggleDrawer()">Client Client Reviews</a></li>
+        </ul>
+    </div>
+
+    <!-- HERO SECTION -->
+    <section class="hero" id="home">
+        <div class="hero-bg-image">
+            <img src="hero_bg.png" alt="DAURAAN Luxury Vault">
+        </div>
+        <div class="hero-content" style="position: relative; z-index: 10;">
+            <h1>THE ART OF <br> <span>TIMELESS ELEGANCE</span></h1>
+            <p>Curated collection of luxury watches and signature perfumes for the refined individual.</p>
+            <div class="hero-btns" style="justify-content: center;">
+                <a href="#products" class="btn-luxury pulse" onclick="fetchProducts('Watches')">Explore Watches</a>
+                <a href="#products" class="btn-luxury" onclick="fetchProducts('Perfumes')">Shop Perfumes</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEW ABOUT SECTION -->
+    <section class="about-section" id="about">
+        <div class="about-container">
+            <div class="about-image">
+                <img src="craftsmanship.png" alt="DAURAAN Craftsmanship">
+            </div>
+            <div class="about-text">
+                <h2 class="section-title" style="padding: 0; text-align: left; margin-bottom: 20px;">A Legacy of
+                    <br><span style="color: var(--text-white);">Excellence</span>
+                </h2>
+                <p>At DAURAAN, we believe true luxury is whispered, not shouted. Our curated collections represent the
+                    pinnacle of craftsmanship, designed for those who command the room without saying a word.</p>
+                <p>From precision timepieces that anchor your legacy to signature scents that linger long after you
+                    depart, every item in our vault is selected to elevate the modern gentleman. Step into a world where
+                    quality outlives time.</p>
+                <div style="margin-top: 40px;">
+                    <a href="#products" class="btn-luxury" style="padding: 12px 30px; font-size: 0.75rem;">Discover Our
+                        Vault</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- DYNAMIC SHOP SECTIONS -->
+    <div id="dynamic-shop-container" style="min-height: 50vh;">
+        <h2 class="section-title" id="products">Top Selling Collection</h2>
+        <main class="product-grid" id="product-grid">
+            <div class="skeleton"></div>
+            <div class="skeleton"></div>
+            <div class="skeleton"></div>
+            <div class="skeleton"></div>
+        </main>
+    </div>
+
+    <!-- CLIENT REVIEWS SECTION -->
+    <section class="reviews-section" id="reviews">
+        <h2 class="section-title">Client Reviews</h2>
+        <div class="reviews-grid">
+            <div class="review-card">
+                <div class="rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                        class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                <p class="review-text">"An absolutely seamless experience. The watch arrived exactly as described, with
+                    packaging that rivals any international luxury brand. Truly impressed by DAURAAN's standard."</p>
+                <span class="reviewer-name">Zain Ahmed</span>
+                <span class="reviewer-location">DHA, Lahore</span>
+            </div>
+
+            <div class="review-card">
+                <div class="rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                        class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                <p class="review-text">"I ordered one of their signature perfumes for my husband's anniversary. The
+                    scent is incredibly long-lasting and screams sophistication. Customer service was outstanding."</p>
+                <span class="reviewer-name">Ayesha Malik</span>
+                <span class="reviewer-location">Clifton, Karachi</span>
+            </div>
+
+            <div class="review-card">
+                <div class="rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                        class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                <p class="review-text">"Premium quality without the absurd markup. The automatic skeleton watch I
+                    purchased is a masterpiece. I will definitely be expanding my collection from their vault."</p>
+                <span class="reviewer-name">Omar Farooq</span>
+                <span class="reviewer-location">F-11, Islamabad</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- PREMIUM FOOTER -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col brand-col">
+                <div class="logo-container" style="align-items: flex-start; margin-bottom: 20px;">
+                    <span class="logo-main" style="font-size: 2rem;">DAURAAN</span>
+                    <span class="logo-tag">Timeless Luxury Redefined</span>
+                </div>
+                <p
+                    style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 30px; font-family: 'Montserrat', sans-serif;">
+                    Curating the world's most distinguished timepieces and signature fragrances for the modern elite.
+                </p>
+                <div class="footer-socials" style="justify-content: flex-start;">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <h4>Discover</h4>
+                <ul>
+                    <li><a href="#products" onclick="fetchProducts('Watches')">Automatic Watches</a></li>
+                    <li><a href="#products" onclick="fetchProducts('Perfumes')">Signature Perfumes</a></li>
+                    <li><a href="#products" onclick="fetchProducts('Belts')">Luxury Belts</a></li>
+                    <li><a href="#products" onclick="fetchProducts('Body Sprays')">Body Sprays</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>Client Care</h4>
+                <ul>
+                    <li><a href="#">Contact Concierge</a></li>
+                    <li><a href="#">Shipping & Returns</a></li>
+                    <li><a href="#">Authenticity Guarantee</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>The Vault Newsletter</h4>
+                <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 15px;">Subscribe for exclusive
+                    access to limited drops.</p>
+                <div class="newsletter-form">
+                    <input type="email" placeholder="Email Address"
+                        style="padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-subtle); color: white; width: 100%; margin-bottom: 10px; font-family: inherit;">
+                    <button class="btn-luxury pulse"
+                        style="width: 100%; padding: 12px; font-size: 0.8rem;">Subscribe</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            &copy; 2026 DAURAAN PREMIUM. ALL RIGHTS RESERVED.
+        </div>
+    </footer>
+
+    <!-- PREMIUM PRODUCT MODAL -->
+    <div id="product-modal" class="modal-overlay" onclick="closeProductModal(event)">
+        <div class="modal-content product-content" onclick="event.stopPropagation()">
+            <button class="modal-close" onclick="closeProductModal(event)">&times;</button>
+
+            <div class="product-left">
+                <div class="gallery-wrapper">
+                    <div class="main-image-container">
+                        <img id="modal-img" src="" alt="Product Image">
+                        <button id="modal-next" onclick="changeImageModal(1)"><i
+                                class="fas fa-chevron-right"></i></button>
+                        <button id="modal-prev" onclick="changeImageModal(-1)"><i
+                                class="fas fa-chevron-left"></i></button>
+                    </div>
+                    <div class="thumbnail-row" id="modal-thumbnails">
+                        <!-- Thumbnails injected via JS -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-right">
+                <span id="modal-category"
+                    style="color: var(--accent-gold); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px;"></span>
+                <h2 id="modal-name" class="product-detail-name">...</h2>
+                <div id="modal-price" class="product-detail-price">...</div>
+
+                <div id="modal-desc">
+                    <!-- Dynamic Description -->
+                </div>
+
+                <div class="buy-section">
+                    <button id="buy-now-btn" class="btn-luxury pulse"
+                        style="display: block; width: 100%; font-family: 'Outfit', sans-serif;"
+                        onclick="openCheckoutForm()">
+                        BUY NOW
+                    </button>
+                    <p class="stock-indicator"
+                        style="color: #ff4444; font-size: 0.8rem; text-align: center; margin-top: 10px; font-weight: 500; letter-spacing: 1px;">
+                        <i class="fas fa-fire"></i> Only 10 Pieces Left
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CHECKOUT MODAL -->
+    <div id="checkout-modal" class="modal-overlay" onclick="closeCheckoutForm(event)">
+        <div class="modal-content glass" onclick="event.stopPropagation()"
+            style="max-width: 500px; padding: 40px; text-align: left;">
+            <button class="modal-close" onclick="closeCheckoutForm(event)"
+                style="top: 10px; right: 15px;">&times;</button>
+            <h3
+                style="color: var(--accent-gold); font-family: 'Cinzel', serif; margin-bottom: 25px; text-align: center; font-size: 1.8rem;">
+                Complete Order</h3>
+
+            <form id="checkout-form" onsubmit="submitCheckout(event)">
+                <div class="smart-field" style="margin-bottom: 15px;">
+                    <label>Full Name</label>
+                    <input type="text" id="checkout-name" required
+                        style="width: 100%; padding: 12px; background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border-subtle); color: var(--text-main); border-radius: 4px; font-family: inherit;">
+                </div>
+                <div class="smart-field" style="margin-bottom: 15px;">
+                    <label>Email Address</label>
+                    <input type="email" id="checkout-email" required
+                        style="width: 100%; padding: 12px; background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border-subtle); color: var(--text-main); border-radius: 4px; font-family: inherit;">
+                </div>
+                <div class="smart-field" style="margin-bottom: 15px;">
+                    <label>Phone Number</label>
+                    <input type="tel" id="checkout-phone" required
+                        style="width: 100%; padding: 12px; background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border-subtle); color: var(--text-main); border-radius: 4px; font-family: inherit;">
+                </div>
+                <div class="smart-field" style="margin-bottom: 25px;">
+                    <label>Delivery Address</label>
+                    <textarea id="checkout-address" required rows="3"
+                        style="width: 100%; padding: 12px; background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border-subtle); color: var(--text-main); border-radius: 4px; font-family: inherit; resize: vertical;"></textarea>
+                </div>
+                <button type="submit" class="btn-luxury"
+                    style="width: 100%; text-align: center; background: var(--gold-gradient); color: black; border: none;">DONE</button>
+            </form>
+        </div>
+    </div>
+
+
+
+    <!-- FLOATING WHATSAPP BUTTON (SUPPORT) -->
+    <a href="https://wa.me/923130823443?text=Hello%20DAURAAN,%20I%20have%20an%20inquiry." target="_blank"
+        class="floating-wa">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>

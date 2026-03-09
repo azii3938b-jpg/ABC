@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details | DAURAAN</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Shared styles moved to style.css */
+    </style>
+</head>
+
+<body>
+
+    <!-- STICKY HEADER -->
+    <header class="sticky-nav">
+        <button class="nav-tool" onclick="toggleDrawer()">
+            <i class="fas fa-bars"></i>
+        </button>
+
+        <a href="index.html" class="logo-container">
+            <span class="logo-main">DAURAAN</span>
+            <span class="logo-tag">Premium Lifestyle Collection</span>
+        </a>
+
+        <div style="display: flex; gap: 15px;">
+            <button class="nav-tool" onclick="toggleTheme()" id="theme-toggle">
+                <i class="fas fa-sun"></i>
+            </button>
+            <!-- <a href="admin.html" class="nav-tool">
+                <i class="far fa-user-circle"></i>
+            </a> -->
+        </div>
+    </header>
+
+    <!-- SIDE DRAWER -->
+    <div class="drawer-overlay" id="drawer-overlay" onclick="toggleDrawer()"></div>
+    <div class="side-drawer" id="side-drawer">
+        <a href="index.html" class="logo-container" style="margin-bottom: 40px;">
+            <span class="logo-main">DAURAAN</span>
+        </a>
+        <ul class="drawer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html#products">Shop Watches</a></li>
+            <li><a href="index.html#products">Shop Perfumes</a></li>
+            <li><a href="index.html#products">Luxury Belts</a></li>
+            <li><a href="index.html#products">Body Sprays</a></li>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </div>
+
+    <!-- PRODUCT DETAIL SECTION -->
+    <main class="product-page-container" id="product-detail-container">
+        <div class="product-content">
+            <div class="product-left">
+                <a href="index.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Collection</a>
+                <div class="gallery-wrapper">
+                    <div class="main-image-container">
+                        <img id="product-img" src="placeholder.jpg" alt="Product Image">
+                        <button id="slider-prev" onclick="changeImage(-1)"><i class="fas fa-chevron-left"></i></button>
+                        <button id="slider-next" onclick="changeImage(1)"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                    <div class="thumbnail-row" id="thumbnail-container">
+                        <!-- Thumbnails injected via JS -->
+                    </div>
+                </div>
+            </div>
+            <div class="product-right">
+                <span id="product-category"
+                    style="color: var(--accent-gold); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px;"></span>
+                <h1 id="product-name" class="product-detail-name">...</h1>
+                <div id="product-price" class="product-detail-price">...</div>
+
+                <div id="product-desc" style="color: var(--text-muted); line-height: 1.8; margin-bottom: 40px;">
+                    <!-- Content populated by app.js -->
+                </div>
+
+                <div class="buy-section">
+                    <button id="buy-now-btn" class="btn-luxury pulse"
+                        style="display: block; width: 100%; font-family: 'Outfit', sans-serif;"
+                        onclick="openCheckoutForm()">
+                        BUY NOW
+                    </button>
+                    <p class="stock-indicator"
+                        style="color: #ff4444; font-size: 0.8rem; text-align: center; margin-top: 10px; font-weight: 500; letter-spacing: 1px;">
+                        <i class="fas fa-fire"></i> Only 10 Pieces Left
+                    </p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="logo-container" style="margin-bottom: 30px;">
+            <span class="logo-main" style="font-size: 2.5rem;">DAURAAN</span>
+            <span class="logo-tag" style="font-size: 0.8rem;">Timeless Luxury Redefined</span>
+        </div>
+        <div class="footer-socials">
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-facebook"></i></a>
+
+        </div>
+        <div class="footer-info">
+            &copy; 2026 DAURAAN PREMIUM. ALL RIGHTS RESERVED. <br>
+            LUXURY WATCHES | SIGNATURE PERFUMES | PREMIUM HOME
+        </div>
+    </footer>
+
+    <!-- CHECKOUT MODAL -->
+    <div id="checkout-modal" class="modal-overlay" onclick="closeCheckoutForm(event)">
+        <div class="modal-content glass" onclick="event.stopPropagation()"
+            style="max-width: 500px; padding: 40px; text-align: left;">
+            <button class="modal-close" onclick="closeCheckoutForm(event)"
+                style="top: 10px; right: 15px;">&times;</button>
+            <h3
+                style="color: var(--accent-gold); font-family: 'Cinzel', serif; margin-bottom: 25px; text-align: center; font-size: 1.8rem;">
+                Complete Order</h3>
+
+            <form id="checkout-form" onsubmit="submitCheckout(event)">
+                <div class="smart-field" style="margin-bottom: 15px;">
+                    <label>Full Name</label>
+                    <input type="text" id="checkout-name" required
+                        style="width: 100%; padding: 12px; background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border-subtle); color: var(--text-main); border-radius: 4px; font-family: inherit;">
+                </div>
+                <div class="smart-field" style="margin-bottom: 15px;">
+                    <label>Email Address</label>
+                    <input type="email" id="checkout-email" required
+                        style="width: 100%; padding: 12px; background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border-subtle); color: var(--text-main); border-radius: 4px; font-family: inherit;">
+                </div>
+                <div class="smart-field" style="margin-bottom: 15px;">
+                    <label>Phone Number</label>
+                    <input type="tel" id="checkout-phone" required
+                        style="width: 100%; padding: 12px; background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border-subtle); color: var(--text-main); border-radius: 4px; font-family: inherit;">
+                </div>
+                <div class="smart-field" style="margin-bottom: 25px;">
+                    <label>Delivery Address</label>
+                    <textarea id="checkout-address" required rows="3"
+                        style="width: 100%; padding: 12px; background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border-subtle); color: var(--text-main); border-radius: 4px; font-family: inherit; resize: vertical;"></textarea>
+                </div>
+                <button type="submit" class="btn-luxury"
+                    style="width: 100%; text-align: center; background: var(--gold-gradient); color: black; border: none;">DONE</button>
+            </form>
+        </div>
+    </div>
+
+
+
+    <!-- FLOATING WHATSAPP BUTTON (SUPPORT) -->
+    <a href="https://wa.me/923130823443?text=Hello%20DAURAAN,%20I%20have%20an%20inquiry." target="_blank"
+        class="floating-wa">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>

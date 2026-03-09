@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DAURAAN | Admin Mastery Portal</title>
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .admin-page {
+            padding-top: 100px;
+        }
+
+        .admin-hero {
+            height: 60vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: radial-gradient(circle at center, #111 0%, #050505 100%);
+            margin-bottom: 50px;
+        }
+
+        .admin-hero h1 {
+            font-size: 3rem;
+            color: var(--accent-gold);
+            margin-bottom: 10px;
+        }
+
+        .admin-section {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1s ease;
+            max-width: 800px;
+            margin: 0 auto 100px;
+            padding: 40px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 8px;
+        }
+
+        .admin-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .smart-builder {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            background: #000;
+            padding: 25px;
+            border-radius: 8px;
+            margin-top: 20px;
+            border: 1px dashed #333;
+        }
+
+        .smart-field {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .smart-field label {
+            font-size: 0.75rem;
+            color: var(--accent-gold);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .full-width {
+            grid-column: 1 / -1;
+        }
+
+        #status {
+            text-align: center;
+            margin-top: 20px;
+            font-weight: 600;
+        }
+
+        /* Inventory Styles */
+        .category-block {
+            margin-bottom: 50px;
+        }
+
+        .category-title {
+            color: var(--accent-gold);
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--border-subtle);
+            padding-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .inventory-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .inventory-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #0a0a0a;
+            padding: 15px 20px;
+            border: 1px solid var(--border-subtle);
+            border-radius: 4px;
+            transition: var(--transition-smooth);
+        }
+
+        .inventory-item:hover {
+            border-color: var(--text-muted);
+        }
+
+        .item-info {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .item-img {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 4px;
+            border: 1px solid #333;
+        }
+
+        .item-details h4 {
+            font-size: 1rem;
+            margin-bottom: 5px;
+        }
+
+        .item-details .price {
+            color: var(--accent-gold);
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .btn-delete {
+            background: none;
+            border: 1px solid #ff4444;
+            color: #ff4444;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-delete:hover {
+            background: #ff4444;
+            color: white;
+            box-shadow: 0 0 15px rgba(255, 68, 68, 0.4);
+        }
+
+        /* Confirmation Modal */
+        .confirm-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+            z-index: 3000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .confirm-box {
+            background: var(--bg-card);
+            border: 1px solid var(--accent-gold);
+            padding: 40px;
+            text-align: center;
+            border-radius: 8px;
+            max-width: 400px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+        }
+
+        .confirm-btns {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+            justify-content: center;
+        }
+
+        .btn-cancel {
+            padding: 10px 25px;
+            background: transparent;
+            border: 1px solid var(--text-muted);
+            color: var(--text-main);
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .btn-confirm {
+            padding: 10px 25px;
+            background: #ff4444;
+            border: 1px solid #ff4444;
+            color: white;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+
+<body class="admin-page">
+
+    <header class="admin-hero" style="position: relative;">
+        <!-- Theme Toggle positioned in top right of hero -->
+        <button class="nav-tool" onclick="toggleTheme()" id="theme-toggle"
+            style="position: absolute; top: 30px; right: 40px; color: var(--accent-gold); font-size: 1.5rem;">
+            <i class="fas fa-sun"></i>
+        </button>
+
+        <div class="glass-header">
+            <h1>DAURAN <span class="gold-text">EXECUTIVE</span></h1>
+            <p>Manage your luxury collections with precision.</p>
+        </div>
+    </header>
+
+    <main class="admin-content fade-in">
+        <section class="admin-section form-section luxury-card visible">
+            <h2 class="section-title">Upload New Masterpiece</h2>
+            <form id="product-form">
+                <div class="input-row">
+                    <input type="text" id="name" placeholder="Product Name" required>
+                    <input type="number" id="price" placeholder="Price (PKR)" required>
+                </div>
+
+                <select id="category" required>
+                    <option value="Watches">Luxury Watches</option>
+                    <option value="Perfumes">Signature Perfumes</option>
+                    <option value="Belts">Premium Belts</option>
+                    <option value="Body Sprays">Body Sprays</option>
+                </select>
+
+                <div class="smart-specs">
+                    <h3>Product Story & Details</h3>
+                    <textarea id="spec-narrative"
+                        placeholder="Detailed description, dimensions, specifications..."></textarea>
+                </div>
+
+                <div id="edit-image-preview" style="display:flex; gap:10px; margin-bottom:15px; flex-wrap:wrap;"></div>
+
+                <input type="file" id="image" accept="image/*" multiple required>
+                <button type="submit" id="submit-btn" class="gold-btn">Finalize Collection Item</button>
+            </form>
+            <div id="status"></div>
+        </section>
+
+        <section class="admin-section inventory-section luxury-card visible">
+            <h2 class="section-title">Active Inventory Vault</h2>
+            <div id="inventory-container">
+            </div>
+        </section>
+    </main>
+
+    <div id="delete-modal" class="modal-overlay">
+        <div class="modal-content glass">
+            <h3>Eradicate Item?</h3>
+            <p>Are you sure you want to remove this masterpiece from the Dauran archives?</p>
+            <div class="modal-btns">
+                <button id="confirm-delete-btn" class="danger-btn">Erase Permanently</button>
+                <button onclick="closeDeleteModal()" class="cancel-btn">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- FLOATING WHATSAPP BUTTON (SUPPORT) -->
+    <a href="https://wa.me/923130823443?text=Hello%20DAURAAN,%20I%20have%20an%20inquiry." target="_blank"
+        class="floating-wa">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="app.js"></script>
+    <script>
+        // Simple Fade-in logic for long scroll
+        const observerOptions = { threshold: 0.2 };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.admin-section').forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+</body>
+
+</html>
